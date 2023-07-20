@@ -1,6 +1,19 @@
 #!/bin/bash
 
-# Create a folder who contains downloaded things for the setup
+# MacOS Defaults
+# show Library folder
+chflags nohidden ~/Library
+
+# show hidden files
+defaults write com.apple.finder AppleShowAllFiles YES
+
+# show path bar
+defaults write com.apple.finder ShowPathbar -bool true
+
+# restart finder
+killall Finder;
+
+# Create a folder which contains downloaded things for the setup
 INSTALL_FOLDER=~/.macsetup
 mkdir -p $INSTALL_FOLDER
 MAC_SETUP_PROFILE=$INSTALL_FOLDER/macsetup_profile
@@ -67,16 +80,6 @@ brew install tree
 brew install ack
 brew install bash-completion
 brew install jq
-brew install htop
-brew install tldr
-brew install coreutils
-brew install watch
-
-brew install z
-touch ~/.z
-echo '. /usr/local/etc/profile.d/z.sh' >> $MAC_SETUP_PROFILE
-
-brew install ctop
 
 # fonts (https://github.com/tonsky/FiraCode/wiki/Intellij-products-instructions)
 brew tap homebrew/cask-fonts
@@ -85,28 +88,27 @@ brew install --cask font-jetbrains-mono
 # Browser
 brew install --cask google-chrome
 brew install --cask firefox
-brew install --cask microsoft-edge
 
 # Music / Video
 brew install --cask spotify
-brew install --cask vlc
 
 # Productivity
-brew install --cask evernote                                                                            # cloud note
-brew install --cask kap                                                                                 # video screenshot
-brew install --cask rectangle                                                                           # manage windows
+brew install --cask notion                                                                              # cloud note
+brew install --cask clipy                                                                               # better copy paste
+brew install --cask nordvpn                                                                             # vpn
 
 # Communication
-brew install --cask slack
 brew install --cask whatsapp
+brew install --cask discord
+brew install --cask wechat
 
 # Dev tools
-brew install --cask ngrok                                                                               # tunnel localhost over internet.
 brew install --cask postman                                                                             # Postman makes sending API requests simple.
 
 # IDE
 brew install --cask jetbrains-toolbox
 brew install --cask visual-studio-code
+brew install --cask sublime-text
 
 # Language
 ## Node / Javascript
@@ -115,22 +117,13 @@ brew install nvm                                                                
 nvm install node                                                                                     # "node" is an alias for the latest version
 brew install yarn                                                                                    # Dependencies management for node
 
-
 ## Java
 curl -s "https://get.sdkman.io" | bash                                                               # sdkman is a tool to manage multiple version of java
 source "$HOME/.sdkman/bin/sdkman-init.sh"
 sdk install java
 brew install maven
 brew install gradle
-
-## golang
-{
-  echo "# Go development"
-  echo "export GOPATH=\"\${HOME}/.go\""
-  echo "export GOROOT=\"\$(brew --prefix golang)/libexec\""
-  echo "export PATH=\"\$PATH:\${GOPATH}/bin:\${GOROOT}/bin\""
-}>>$MAC_SETUP_PROFILE
-brew install go
+sdk install kotlin
 
 ## python
 echo "export PATH=\"/usr/local/opt/python/libexec/bin:\$PATH\"" >> $MAC_SETUP_PROFILE
@@ -142,17 +135,8 @@ brew install pyenv
 # shellcheck disable=SC2016
 echo 'eval "$(pyenv init -)"' >> $MAC_SETUP_PROFILE
 
-
-## terraform
-brew install terraform
-terraform -v
-
 # Databases
 brew install --cask dbeaver-community # db viewer
-brew install libpq                  # postgre command line
-brew link --force libpq
-# shellcheck disable=SC2016
-echo 'export PATH="/usr/local/opt/libpq/bin:$PATH"' >> $MAC_SETUP_PROFILE
 
 # SFTP
 brew install --cask cyberduck
@@ -168,10 +152,8 @@ brew install docker-machine-completion
 brew install awscli # Official command line
 pip3 install saws    # A supercharged AWS command line interface (CLI).
 
-# K8S command line
-brew install kubectx
-brew install asdf
-asdf install kubectl latest
+# Infrastructure as Code
+brew install aws-cdk
 
 # reload profile files.
 {
