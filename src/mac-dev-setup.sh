@@ -52,6 +52,7 @@ git config --global init.templateDir ~/.git-templates/git-secrets
 
 # ZSH
 brew install zsh zsh-completions                                                                      # Install zsh and zsh completions
+brew install zsh-syntax-highlighting
 sudo chmod -R 755 /usr/local/share/zsh
 sudo chown -R root:staff /usr/local/share/zsh
 {
@@ -65,8 +66,6 @@ sudo chown -R root:staff /usr/local/share/zsh
 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"# Install oh-my-zsh on top of zsh to getting additional functionality
 # Terminal replacement https://www.iterm2.com
 brew install --cask iterm2
-# Pimp command line
-brew install micro                                                                                    # replacement for nano/vi
 brew install lsd                                                                                      # replacement for ls
 {
   echo "alias ls='lsd'"
@@ -128,7 +127,8 @@ sdk install kotlin
 ## python
 echo "export PATH=\"/usr/local/opt/python/libexec/bin:\$PATH\"" >> $MAC_SETUP_PROFILE
 brew install python
-pip install --user pipenv
+brew install --cask miniconda
+conda init "$(basename "${SHELL}")"
 pip install --upgrade setuptools
 pip install --upgrade pip
 brew install pyenv
