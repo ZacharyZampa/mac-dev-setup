@@ -90,10 +90,12 @@ brew install --cask firefox
 
 # Music / Video
 brew install --cask spotify
+brew install --cask notunes
+defaults write digital.twisted.noTunes replacement /Applications/Spotify.app
 
 # Productivity
 brew install --cask notion                                                                              # cloud note
-brew install --cask clipy                                                                               # better copy paste
+brew install maccy                                                                                      # better copy paste
 brew install --cask nordvpn                                                                             # vpn
 
 # Communication
